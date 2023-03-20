@@ -2,7 +2,17 @@ import { VercelRequest, VercelResponse } from '@vercel/node'
 import { Bot, InlineKeyboard, webhookCallback } from 'grammy'
 import dns from 'dns';
 
-
+function queryDomain(domain: string): Promise<string[]> {
+  return new Promise((resolve, reject) => {
+    dns.resolve(domain, (err, addresses) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(addresses);
+      }
+    });
+  });
+}
 
 const { BOT_TOKEN, BOT_URL } = process.env
 
@@ -18,14 +28,12 @@ bot.command('ddns', async (ctx) => {
     await ctx.reply('Please provide a domain name')
     return
   }
-  dns.lookup(domain, (err, address) => {
-    if (err) {
-      console.error(err);
-      ctx.reply(`Failed to resolve ${domain}`)
-      return
-    }
-    ctx.reply(`The IP address of ${domain} is ${address}`)
-  })
+    try {
+    const addresses = await queryDomain('google.com');
+    ctx.reply(`The IP address of ${domain} is ${addresses}`)
+  } catch (err) {
+    ctx.reply(`Failed to resolve ${domain}`)
+  }
 })
 
 bot.command('gethook', async (ctx) => {
