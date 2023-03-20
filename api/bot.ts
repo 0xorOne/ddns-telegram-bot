@@ -6,7 +6,7 @@ function queryDomain4(domain: string): Promise<string[]> {
   return new Promise((resolve, reject) => {
     dns.resolve(domain, (err, addresses) => {
       if (err) {
-        reject(err);
+        resolve([]);
       } else {
         resolve(addresses);
       }
@@ -18,7 +18,7 @@ function queryDomain6(domain: string): Promise<string[]> {
   return new Promise((resolve, reject) => {
     dns.resolve6(domain, (err, addresses) => {
       if (err) {
-        reject(err);
+        resolve([]);
       } else {
         resolve(addresses);
       }
