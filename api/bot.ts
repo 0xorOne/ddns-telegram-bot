@@ -2,9 +2,6 @@ import { VercelRequest, VercelResponse } from '@vercel/node'
 import { Bot, InlineKeyboard, webhookCallback } from 'grammy'
 import dns from 'dns';
 
-dns.lookup('example.com', (err, address) => {
-  console.log(address);
-});
 
 
 const { BOT_TOKEN, BOT_URL } = process.env
