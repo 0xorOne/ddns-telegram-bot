@@ -18,18 +18,18 @@ bot.command('start', async (ctx) => {
 bot.command('ddns', async (ctx) => {
   const domain = ctx.message.text.split(' ')[1];
   if (!domain) {
-    ctx.reply('Please provide a domain name');
-    return;
+    ctx.reply('Please provide a domain name')
+    return
   }
   dns.lookup(domain, (err, address) => {
     if (err) {
       console.error(err);
-      ctx.reply(`Failed to resolve ${domain}`);
-      return;
+      ctx.reply(`Failed to resolve ${domain}`)
+      return
     }
-    ctx.reply(`The IP address of ${domain} is ${address}`);
-  });
-});
+    ctx.reply(`The IP address of ${domain} is ${address}`)
+  })
+})
 
 bot.command('gethook', async (ctx) => {
     const chanId = ctx.message.chat.id
