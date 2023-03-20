@@ -1,5 +1,11 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { Bot, InlineKeyboard, webhookCallback } from 'grammy'
+import dns from 'dns';
+
+dns.lookup('example.com', (err, address) => {
+  console.log(address);
+});
+
 
 const { BOT_TOKEN, BOT_URL } = process.env
 
@@ -8,6 +14,22 @@ export const bot = new Bot(BOT_TOKEN)
 bot.command('start', async (ctx) => {
     await ctx.reply('Welcome to use DDNS Bot.')
 })
+
+bot.command('ddns', async (ctx) => {
+  const domain = ctx.message.text.split(' ')[1];
+  if (!domain) {
+    ctx.reply('Please provide a domain name');
+    return;
+  }
+  dns.lookup(domain, (err, address) => {
+    if (err) {
+      console.error(err);
+      ctx.reply(`Failed to resolve ${domain}`);
+      return;
+    }
+    ctx.reply(`The IP address of ${domain} is ${address}`);
+  });
+});
 
 bot.command('gethook', async (ctx) => {
     const chanId = ctx.message.chat.id
