@@ -13,7 +13,8 @@ type DDNSRequest = {
 }
 
 function buildOneIPResult(type: string, data: IP) {
-    return `${type}: ${data.result}\nIP: ${data.addr}\nDomains: ${data.domains}\n`
+    const currentTime = new Date().toLocaleString()
+    return `Current Time: ${currentTime}\n${type}: ${data.result}\nIP: ${data.addr}\nDomains: ${data.domains}\n`
 }
 
 export default async (req: VercelRequest, res: VercelResponse) => {
