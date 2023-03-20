@@ -22,7 +22,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     const chatId = req.query['chatId'] as string
     let ddnsReq = req.body as DDNSRequest
     
-    let text = "你好"
+    let text = "The current IPv6 address has changed:\n"
     if (ddnsReq.ipv4) {
         text += buildOneIPResult('IPv4', ddnsReq.ipv4)
     }
