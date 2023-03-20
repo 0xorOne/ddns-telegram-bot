@@ -29,10 +29,10 @@ bot.command('ddns', async (ctx) => {
     return
   }
     try {
-    const addresses = await queryDomain('google.com');
-    ctx.reply(`The IP address of ${domain} is ${addresses}`)
+    const addresses = await queryDomain(domain);
+    await ctx.reply(`The IP address of ${domain} is ${addresses}`)
   } catch (err) {
-    ctx.reply(`Failed to resolve ${domain}`)
+    await ctx.reply(`Failed to resolve ${domain}`)
   }
 })
 
