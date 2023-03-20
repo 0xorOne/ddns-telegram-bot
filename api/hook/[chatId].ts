@@ -17,7 +17,7 @@ type DDNSRequest = {
 function buildOneIPResult(type: string, data: IP) {
     const options = { timeZone: 'Asia/Shanghai' }
     const currentTime = new Date().toLocaleString('en-US', options)
-    return `${data.text}\n\nCurrent Time: ${currentTime}\n${type}: ${data.result}\nIP: ${data.addr}\nDomains: ${data.domains}\nCurrent Domain Resolve: ${data.resolve}\n`
+    return `${data.text}\n\nCurrent Time: ${currentTime}\n${type}: ${data.result}\nIP: ${data.addr}\nDomains: ${data.domains}\nDomain2IP: ${data.resolve}\n`
 }
 
 export default async (req: VercelRequest, res: VercelResponse) => {
