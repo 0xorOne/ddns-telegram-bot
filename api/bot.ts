@@ -2,7 +2,7 @@ import { VercelRequest, VercelResponse } from '@vercel/node'
 import { Bot, InlineKeyboard, webhookCallback } from 'grammy'
 import dns from 'dns';
 
-function queryDomain(domain: string): Promise<string[]> {
+function queryDomain4(domain: string): Promise<string[]> {
   return new Promise((resolve, reject) => {
     dns.resolve(domain, (err, addresses) => {
       if (err) {
@@ -11,6 +11,11 @@ function queryDomain(domain: string): Promise<string[]> {
         resolve(addresses);
       }
     });
+  });
+}
+
+function queryDomain6(domain: string): Promise<string[]> {
+  return new Promise((resolve, reject) => {
     dns.resolve6(domain, (err, addresses) => {
       if (err) {
         reject(err);
@@ -36,8 +41,9 @@ bot.command('ddns', async (ctx) => {
     return
   }
     try {
-    const addresses = await queryDomain(domain);
-    await ctx.reply(`Domain: ${domain}\nIP: ${addresses}\n`)
+    const addresses4 = await queryDomain4(domain);
+    const addresses6 = await queryDomain6(domain);
+    await ctx.reply(`Domain: ${domain}\nIPv4: ${addresses4}\nIPv6: ${addresses6}\n`)
   } catch (err) {
     await ctx.reply(`Failed to resolve ${domain}, Err: ${err}`)
   }
