@@ -11,6 +11,13 @@ function queryDomain(domain: string): Promise<string[]> {
         resolve(addresses);
       }
     });
+    dns.resolve6(domain, (err, addresses) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(addresses);
+      }
+    });
   });
 }
 
