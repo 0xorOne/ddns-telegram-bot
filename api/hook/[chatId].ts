@@ -13,7 +13,8 @@ type DDNSRequest = {
 }
 
 function buildOneIPResult(type: string, data: IP) {
-    const currentTime = new Date().toLocaleString()
+    const options = { timeZone: 'Asia/Shanghai' }
+    const currentTime = new Date().toLocaleString('en-US', options)
     return `Current Time: ${currentTime}\n${type}: ${data.result}\nIP: ${data.addr}\nDomains: ${data.domains}\n`
 }
 
