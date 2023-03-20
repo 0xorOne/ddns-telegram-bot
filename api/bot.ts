@@ -32,7 +32,7 @@ bot.command('ddns', async (ctx) => {
     const addresses = await queryDomain(domain);
     await ctx.reply(`Domain: ${domain}\nIP: ${addresses}\n`)
   } catch (err) {
-    await ctx.reply(`Failed to resolve ${domain}`)
+    await ctx.reply(`Failed to resolve ${domain}, Err: ${err}`)
   }
 })
 
