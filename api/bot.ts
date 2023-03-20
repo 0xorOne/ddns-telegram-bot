@@ -21,13 +21,13 @@ bot.command('ddns', async (ctx) => {
     await ctx.reply('Please provide a domain name')
     return
   }
-  dns.lookup(domain, async (err, address) => {
+  dns.lookup(domain, (err, address) => {
     if (err) {
       console.error(err);
-      await ctx.reply(`Failed to resolve ${domain}`)
+      ctx.reply(`Failed to resolve ${domain}`)
       return
     }
-    await ctx.reply(`The IP address of ${domain} is ${address}`)
+    ctx.reply(`The IP address of ${domain} is ${address}`)
   })
 })
 
