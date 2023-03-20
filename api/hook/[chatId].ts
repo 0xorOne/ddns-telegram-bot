@@ -15,14 +15,14 @@ type DDNSRequest = {
 function buildOneIPResult(type: string, data: IP) {
     const options = { timeZone: 'Asia/Shanghai' }
     const currentTime = new Date().toLocaleString('en-US', options)
-    return `Current Time: ${currentTime}\n${type}: ${data.result}\nIP: ${data.addr}\nDomains: ${data.domains}\n`
+    return `\nCurrent Time: ${currentTime}\n${type}: ${data.result}\nIP: ${data.addr}\nDomains: ${data.domains}\n`
 }
 
 export default async (req: VercelRequest, res: VercelResponse) => {
     const chatId = req.query['chatId'] as string
     let ddnsReq = req.body as DDNSRequest
     
-    let text = "The current IPv6 address has changed:\n"
+    let text = "The current IPv6 address has changed:"
     if (ddnsReq.ipv4) {
         text += buildOneIPResult('IPv4', ddnsReq.ipv4)
     }
